@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=IBM+Plex+Sans+Arabic:wght@500&display=swap');
+
+@mixin animation($animation) {
+    -webkit-animation: $animation;
+    -moz-animation: $animation;
+    animation: $animation;
+}
+
+@mixin keyframes($name, $name1) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    transform: $transform;
+}
+
+body {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+h1 {
+    color: #000;
+    font-size: 24px;
+    text-transform: uppercase;
+    line-height: 44px;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.container {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    display: inline-block;
+    -webkit-perspective: 800px;
+    -moz-perspective: 800px;
+    -o-perspective: 800px;
+    perspective: 800px;
+}
+
+.rotate {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    figure {
+        display: block;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        line-height: 200px;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        font-size: 40px;
+        position: absolute;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -o-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    &:hover {
+        -webkit-animation-play-state: paused;
+        animation-play-state: paused;
+    }
+}
+
+//=====================================
+
+//RotateX
+#rotateX {
+    @include animation(rotateX 3.5s ease infinite);
+
+    .back {
+        @include transform(rotateX(180deg));
+    }
+}
+
+//rotateX keyframes
+@include keyframes(rotateX, rotateX animation) {
+    from {
+        @include transform(rotateX(0deg));
+    }
+
+    to {
+        @include transform(rotateX(360deg));
+    }
+}
+
+//================================================
+
+//RotateY
+#rotateY {
+    @include animation(rotateY 3s ease infinite);
+
+    .back {
+        @include transform(rotateY(180deg));
+    }
+}
+
+//rotateY keyframes
+@include keyframes(rotateY, rotateY animation) {
+    from {
+        @include transform(rotateY(0deg));
+    }
+
+    to {
+        @include transform(rotateY(360deg));
+    }
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
